@@ -13,20 +13,20 @@ const fillFormAndProceed = async (driver) => {
     // Esperar a que el botón "Next" aparezca inmediatamente después de la carga de la página
     let nextButton = await driver.wait(
       until.elementLocated(By.css("button.sc-53faf2db-1.eGbWzi")),
-      10000
+      5000
     );
     await nextButton.click();
 
     // Esperar a que el primer campo esté disponible y completar el formulario
     let nameField = await driver.wait(
       until.elementLocated(By.css("#e533baac-47fc-4c87-9557-56d40d318d23")),
-      10000
+      5000
     );
     await nameField.sendKeys("Max Cereceda");
 
     let emailField = await driver.wait(
       until.elementLocated(By.id("008fd698-c471-47c9-84ae-6c2f92c8e8aa")),
-      10000
+      5000
     );
     await emailField.sendKeys("cereceda1991@gmail.com");
 
@@ -34,19 +34,22 @@ const fillFormAndProceed = async (driver) => {
       until.elementLocated(
         By.css("#choice_ee1eae35-8a98-4410-b986-ffd162a8af35")
       ),
-      10000
+      5000
     );
     await radioButton.click();
 
     // Esperar a que el botón "Next" esté disponible y hacer clic en él
     let nextButton2 = await driver.wait(
       until.elementLocated(By.css('button[aria-label="Next"]')),
-      10000
+      5000
     );
     await nextButton2.click();
 
     // Esperar a que la navegación a la siguiente página se complete
-    await driver.wait(until.urlContains("next-page-url"), 10000);
+    await driver.wait(
+      until.elementLocated(By.id("02c193c8-ac8c-467f-a4fd-c59c6ad668b1")),
+      5000
+    );
 
     console.log("Primera parte del formulario completada.");
   } catch (error) {
@@ -62,7 +65,7 @@ const fillTeamMateAndRatings = async (driver) => {
       until.elementIsVisible(
         driver.findElement(By.id("02c193c8-ac8c-467f-a4fd-c59c6ad668b1"))
       ),
-      10000
+      5000
     );
     await teamMateField.sendKeys("Pedro García");
 
@@ -86,12 +89,10 @@ const fillTeamMateAndRatings = async (driver) => {
     for (const ratingId of ratingIds) {
       let ratingElement = await driver.wait(
         until.elementLocated(By.css(ratingId)),
-        10000
+        5000
       );
       await ratingElement.click();
     }
-
-    
 
     console.log("Formulario de calificaciones completado.");
   } catch (error) {
